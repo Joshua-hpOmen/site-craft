@@ -7,7 +7,6 @@ type Props = {
   params: {
     agencyId: string
   }
-  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 const Page = async ({params}: Props) => {
