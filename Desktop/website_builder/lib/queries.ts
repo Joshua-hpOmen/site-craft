@@ -75,6 +75,8 @@ export const getUserAuthDetails = async () => {
         })
         return userData
     }
+
+    return null
 }
 
 const createTeamUser = async (agencyId: string, user: User) => {
