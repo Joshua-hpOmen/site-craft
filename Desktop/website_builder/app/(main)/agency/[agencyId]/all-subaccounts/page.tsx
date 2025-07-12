@@ -4,11 +4,13 @@ import SearchBar from './_components/SearchBar'
 import CreateSubbAccountButtton from './_components/CreateSubbAccountButtton'
 
 type Props = {
-    params : {agencyId : string}
+  params: {
+    agencyId: string
+  }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-
-const page = async (props: Props) => {
+const Page = async (props: Props) => {
 
   const user = await getUserAuthDetails();
 
@@ -30,4 +32,4 @@ const page = async (props: Props) => {
 }
 
 
-export default page
+export default Page
