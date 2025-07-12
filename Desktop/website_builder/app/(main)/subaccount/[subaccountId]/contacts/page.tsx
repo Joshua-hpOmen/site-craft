@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import clsx from 'clsx'
 
 type Props = {
-    params: {subaccountId: string}
+    params: Promise<{subaccountId: string}>
 }
 type SubaccountWithContacts = SubAccount & {
     Contact : (Contact & {Ticket: Ticket[]})[]
@@ -26,9 +26,10 @@ const formatTotal = (tickets: Ticket[]) => {
 }
 
 const page = async (props: Props) => {
+    const params  = await props.params
 
     const contacts = await db.subAccount.findUnique({
-        where: {id: props.params.subaccountId},
+        where: {id: params.subaccountId},
         include: {
             Contact: {
                 include: {Ticket: {select: {value: true}}},
@@ -45,7 +46,7 @@ const page = async (props: Props) => {
             <header className='flex justify-between'>
                 <section className='text-white text-2xl font-semibold'>Contacts</section>
                 <section>
-                    <CreateContactButton subaccountId={props.params.subaccountId}/>
+                    <CreateContactButton subaccountId={params.subaccountId}/>
                 </section>
             </header>
 

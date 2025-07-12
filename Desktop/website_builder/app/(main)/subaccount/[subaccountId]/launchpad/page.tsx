@@ -8,20 +8,16 @@ import { getStripeOAuthLink } from '@/lib/utils'
 
 
 type Props = {
-    searchParams: {state: string, code: string}
-    params: {subaccountId:string}
+    searchParams: Promise<{state: string, code: string}>
+    params: Promise<{subaccountId:string}>
 }
 
 const page = async (props: Props) => {
-    const subaccountDetails= await db.subAccount.findUnique({where: {id: props.params.subaccountId}})
+    const params = await props.params;
+    const searchParams = await props.searchParams
+    const subaccountDetails= await db.subAccount.findUnique({where: {id: params.subaccountId}})
 
     if(!subaccountDetails) return
-
-    let detailsExist = true
-    for(const detail in subaccountDetails){
-        if (!detail){ detailsExist = false; break}
-    }
-    
 
   //stripe connect 
   const stripeOAuthLink = getStripeOAuthLink(
@@ -31,12 +27,12 @@ const page = async (props: Props) => {
 
   let connectedStripeAccount = false
 
-  if (props.searchParams.code && !subaccountDetails.connectAccountId){
+  if (searchParams.code && !subaccountDetails.connectAccountId){
       try {
 
-        const response = await stripe.oauth.token({ grant_type: 'authorization_code', code: props.searchParams.code, })
+        const response = await stripe.oauth.token({ grant_type: 'authorization_code', code: searchParams.code, })
         await db.subAccount.update({
-          where: { id: props.params.subaccountId },
+          where: { id: params.subaccountId },
           data: { connectAccountId: response.stripe_user_id },
         })
         connectedStripeAccount = true
@@ -76,7 +72,7 @@ const page = async (props: Props) => {
             <div className='text-sm py-3'>Fill in all your subaccount details</div>
           </div>
           
-          {!subaccountDetails ? <Link href={`/agency/${props.params.subaccountId}/settings`} className='bg-blue-700 rounded-md px-6 py-3'>Start</Link> : <CheckCircle size={50} className='text-primary p-2 flex-shrink-0'/>}
+          {!subaccountDetails ? <Link href={`/agency/${params.subaccountId}/settings`} className='bg-blue-700 rounded-md px-6 py-3'>Start</Link> : <CheckCircle size={50} className='text-primary p-2 flex-shrink-0'/>}
         </div>
         
         

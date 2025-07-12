@@ -3,7 +3,7 @@ import React from 'react'
 import DataTable from './_components/DataTable'
 
 type Props = {
-    params: {agencyId:string}
+    params: Promise<{agencyId:string}>
 }
 
 const page = async (props: Props) => {

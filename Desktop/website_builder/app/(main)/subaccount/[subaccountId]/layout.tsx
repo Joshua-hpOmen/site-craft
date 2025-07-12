@@ -8,10 +8,11 @@ import React from 'react'
 
 type Props = {
     children: React.ReactNode,
-    params: {subaccountId: string}
+    params: Promise<{subaccountId: string}>
 }
 
 const layout = async (props: Props) => {
+    const params = await props.params
     const agencyId = await verifyAndAcceptInvitation()
     if(!agencyId) return redirect("/unauthorised")
 
@@ -23,7 +24,7 @@ const layout = async (props: Props) => {
     if(!user.privateMetadata.role) return redirect("/")
 
     const allPermissions = await getUserAuthDetails()
-    const hasPermission = allPermissions?.Permissions.find(permission => permission.access && permission.subAccountId === props.params.subaccountId)
+    const hasPermission = allPermissions?.Permissions.find(permission => permission.access && permission.subAccountId === params.subaccountId)
     if(!hasPermission) return redirect("/unauthorised")
 
     const allNotification = await getNotifcationAndUser(agencyId)
@@ -31,12 +32,12 @@ const layout = async (props: Props) => {
     if(["AGENCY_OWNER", "AGENCY_ADMIN"].find(role => role === user.privateMetadata.role)){
         notifications = allNotification
     }else{
-        notifications = allNotification?.filter(notification => notification.subAccountId === props.params.subaccountId)
+        notifications = allNotification?.filter(notification => notification.subAccountId === params.subaccountId)
     }
 
   return (
     <div className='relative w-[100%] min-h-screen'>
-        <GeneralNavBar notifications={notifications} role={user.privateMetadata.role as Role}><Sidebar id={props.params.subaccountId} type='subaccount'/></GeneralNavBar>
+        <GeneralNavBar notifications={notifications} role={user.privateMetadata.role as Role}><Sidebar id={params.subaccountId} type='subaccount'/></GeneralNavBar>
         <div className='absolute lg:left-[30%] top-[80px] left-0 bottom-0 right-0'>
           <div className='w-[100%] min-h-full flex justify-center'>
             {props.children}

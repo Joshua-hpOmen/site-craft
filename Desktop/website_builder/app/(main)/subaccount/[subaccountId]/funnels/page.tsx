@@ -1,17 +1,16 @@
 import { db } from '@/lib/db'
 import React from 'react'
-import FunnelComponent from './_components/FunnelComponent'
-import { FolderSearch, PlusCircleIcon } from 'lucide-react'
 import CreateFunnelButton from './_components/CreateFunnelButton'
 import FunnelSection from './_components/FunnelSection'
 
 type Props = {
-  params: {subaccountId: string}
+  params: Promise<{subaccountId: string}>
 }
 
 const page = async (props: Props) => {
+  const params = await props.params
 
-  const funnels = await db.funnel.findMany({where: {subAccountId: props.params.subaccountId}})
+  const funnels = await db.funnel.findMany({where: {subAccountId:           params.subaccountId}})
 
   return (
     <div className='flex justify-center w-full z-20 min-h-full'>
@@ -23,7 +22,7 @@ const page = async (props: Props) => {
           </div>
 
           <div>
-            <CreateFunnelButton subaccountId={props.params.subaccountId} />
+            <CreateFunnelButton subaccountId={params.subaccountId} />
           </div>
         </header>
 

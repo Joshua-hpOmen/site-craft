@@ -1,7 +1,5 @@
-import { Progress } from '@/components/ui/progress'
-import { db } from '@/lib/db'
 import { stripe } from '@/lib/stripe'
-import { ChevronLeft, Contact2, DollarSign, Goal, GoalIcon, ShoppingCart } from 'lucide-react'
+import { ChevronLeft,  DollarSign, ShoppingCart } from 'lucide-react'
 import React from 'react'
 import { AreaChart } from "@tremor/react";
 import CircleProgress from '@/components/global/CircleProgress'
@@ -9,11 +7,13 @@ import Link from 'next/link'
 import { getSubAccountDetails } from '@/lib/queries'
 import PipelineValue from './_components/PipelineValue'
 type Props = {
-    params : {subaccountId: string},
-    searchParams: {code: string}
+    params : Promise<{subaccountId: string}>,
+    searchParams: Promise<{code: string}>
 }
 
 const page = async (props: Props) => {
+  const params = await props.params
+
   let currency = 'USD'
   let sessions
   let totalClosedSessions
@@ -25,7 +25,7 @@ const page = async (props: Props) => {
   const startDate = new Date(`${currentYear}-01-01T00:00:00Z`).getTime()/1000
   const endDate = new Date(`${currentYear}-12-31T23:59:59Z`).getTime()/1000
 
-  const subaccountDetails = await getSubAccountDetails(props.params.subaccountId)
+  const subaccountDetails = await getSubAccountDetails(params.subaccountId)
   if(!subaccountDetails) return;
 
   if(subaccountDetails.connectAccountId){
@@ -58,16 +58,6 @@ const page = async (props: Props) => {
 
     closingRate = + ((totalClosedSessions.length / checkoutSessions.data.length) / 100).toFixed(2) 
   }
-
-  const funnels = await db.funnel.findMany({
-    where: {subAccountId: props.params.subaccountId},
-    include: {FunnelPages: true}
-  })
-
-  const funnelPerformanceMetric = funnels.map(funnel => ({
-    ...funnel,
-    totalFunnelVisits: funnel.FunnelPages.reduce((accumVal, funnelPage) => accumVal + funnelPage.visits, 0 )
-  }))
 
   return (
     <div className='relative w-full h-full p-5'>
@@ -123,7 +113,7 @@ const page = async (props: Props) => {
         </div>
 
         <div className='w-[350px] relative bg-slate-900 rounded-md p-4'>
-            <PipelineValue subaccountId={props.params.subaccountId}/>
+            <PipelineValue subaccountId={params.subaccountId}/>
         </div>
 
         <div className='w-[350px] bg-slate-900 rounded-md p-4'>

@@ -6,10 +6,11 @@ import PricingCards from './_components/PricingCards'
 import clsx from 'clsx'
 
 type Props = {
-    params: { agencyId: string }
+    params: Promise<{ agencyId: string }>
 }
 
 const page = async (props: Props) => {
+    const resolvedParam = await props.params
 
     // This is supposed to be a challenge to be completed
     const addOns = await stripe.products.list({
@@ -18,7 +19,7 @@ const page = async (props: Props) => {
     })
 
     const agencySubcription = await db.agency.findUnique({
-        where: { id: props.params.agencyId },
+        where: { id: resolvedParam.agencyId },
         select: { customerId: true, Subscription: true }
     })
 

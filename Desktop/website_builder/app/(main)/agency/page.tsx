@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 type Props = {
-  searchParams : { plan: Plan, state : string, code: string} //plan from prisma which is basically which plan on stripe based on their subscription
+  searchParams : Promise<{ plan: Plan, state : string, code: string}> //plan from prisma which is basically which plan on stripe based on their subscription
                                                              // state has to do with stripe connect
 }
 

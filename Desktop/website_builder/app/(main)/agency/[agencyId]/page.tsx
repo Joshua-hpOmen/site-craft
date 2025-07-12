@@ -7,11 +7,13 @@ import { AreaChart } from "@tremor/react";
 import CircleProgress from '@/components/global/CircleProgress'
 import Link from 'next/link'
 type Props = {
-    params : {agencyId: string},
-    searchParams: {code: string}
+    params : Promise<{agencyId: string}>,
+    searchParams: Promise<{code: string}>
 }
 
 const page = async (props: Props) => {
+  const params = await props.params;
+
   let currency = 'USD'
   let sessions
   let totalClosedSessions
@@ -23,10 +25,10 @@ const page = async (props: Props) => {
   const startDate = new Date(`${currentYear}-01-01T00:00:00Z`).getTime()/1000
   const endDate = new Date(`${currentYear}-12-31T23:59:59Z`).getTime()/1000
 
-  const agencyDetails = await db.agency.findUnique({where: {id: props.params.agencyId}})
+  const agencyDetails = await db.agency.findUnique({where: {id: params.agencyId}})
   if(!agencyDetails) return;
 
-  const subaccounts = await db.subAccount.findMany({ where: {agencyId: props.params.agencyId} })
+  const subaccounts = await db.subAccount.findMany({ where: {agencyId: params.agencyId} })
 
   if(agencyDetails.connectAccountId){
     const response = await stripe.accounts.retrieve({ stripeAccount: agencyDetails.connectAccountId })

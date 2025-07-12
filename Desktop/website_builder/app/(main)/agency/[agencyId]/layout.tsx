@@ -1,17 +1,15 @@
 'use server'
 import Sidebar from '@/components/sidebar/Sidebar'
 import GeneralNavBar from '@/components/site/GeneralNavBar'
-import useMobile from '@/hooks/useMobile'
 import { getNotifcationAndUser, verifyAndAcceptInvitation } from '@/lib/queries'
 import { currentUser } from '@clerk/nextjs/server'
-import clsx from 'clsx'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
 
 type Props = {
     children : React.ReactNode,
-    params : {agencyId : string}
+    params : Promise<{agencyId : string}>
 }
 
 const layout = async (props: Props) => {

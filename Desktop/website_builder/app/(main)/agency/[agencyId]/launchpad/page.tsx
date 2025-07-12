@@ -7,19 +7,19 @@ import React from 'react'
 import {stripe} from "@/lib/stripe"
 
 type Props = {
-  params: {agencyId: string},
-  searchParams: {code:string} //stripe
+  params: Promise<{ agencyId: string }>
+  searchParams: Promise<{code:string}> //stripe
 }
 
 const page = async (props: Props) => {
   const params = await props.params
-
+  const searchParams = await props.searchParams
   const agencyDetails = await db.agency.findUnique({where : {id: params.agencyId}})
 
   if(!agencyDetails) return
 
   let exists = true
-  for(let details in agencyDetails) {
+  for(const details in agencyDetails) {
     if(details) continue;
     if(!details) {exists = false; break}
   }
@@ -27,12 +27,12 @@ const page = async (props: Props) => {
   const stripeOAuthLink = getStripeOAuthLink("agency", `launchpad___${agencyDetails.id}`)
   let connectedStripeAccount = false
 
-  if(props.searchParams.code){
+  if(searchParams.code){
     if(!agencyDetails.connectAccountId){
       try {
         const response = await stripe.oauth.token({
           grant_type: "authorization_code",
-          code: props.searchParams.code
+          code: searchParams.code
         })
 
         await db.agency.update({
@@ -41,7 +41,7 @@ const page = async (props: Props) => {
         })
 
         connectedStripeAccount = true
-      } catch (error) {
+      } catch {
         console.log("🔴Error could not connect stripe account")
       }
     }
