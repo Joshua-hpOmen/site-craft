@@ -1,0 +1,3 @@
+Complete the following tasks
+    -Animations for the sidebar
+    -Notifications need to be Complete

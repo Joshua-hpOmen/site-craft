@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 
+R (0)
+G (110)
+B (255 */
+
+@layer base {
+  :root {
+    --background: 216 100% 98.04%;
+    --foreground: 213.6 100% 4.9%;
+
+    --primary: 214.12 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --card: 216 100% 98.04%;
+    --card-foreground: 213.6 100% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213.6 100% 4.9%;
+
+    --secondary: 214.74 100% 92.55%;
+    --secondary-foreground: 216 100% 0.98%;
+
+    --muted: 213.6 100% 95.1%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 213.6 100% 95.1%;
+    --accent-foreground: 214.12 100% 50%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 90.2%;
+    --input: 0 0% 90.2%;
+    --ring: 214.12 100% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Name: custom color palette
+       Author: Ilias Ism
+       URL: https://gradient.page */
+
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: linear-gradient(to top left, #007adf, #00ecbc);
+
+    --background: 220 65% 3.52%;
+    --foreground: 220 10% 97.2%;
+
+    --muted: 220 50% 13.2%;
+    --muted-foreground: 220 10% 54.4%;
+
+    --popover: 220 45% 5.72%;
+    --popover-foreground: 220 10% 97.2%;
+
+    --card: 220 45% 5.72%;
+    --card-foreground: 220 10% 97.2%;
+
+    --border: 220 50% 13.2%;
+    --input: 220 50% 13.2%;
+
+    --primary: 220 100% 44%;
+    --primary-foreground: 220 10% 97.2%;
+
+    --secondary: 220 50% 13.2%;
+    --secondary-foreground: 220 10% 97.2%;
+
+    --accent: 220 50% 13.2%;
+    --accent-foreground: 220 10% 97.2%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 220 10% 97.2%;
+
+    --ring: 220 100% 44%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.dotPattern {
+  background-image: radial-gradient(rgb(35, 40, 68) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+.use-automation-zoom-in {
+  animation: automation-zoom-in 0.5s;
+}
+
+@keyframes automation-zoom-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.toggleContainer {
+  background-color: rgba(47, 47, 47, 0.72);
+  width: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  height: 40px;
+  border-radius: 20px; 
+  display: flex;
+  justify-content: start;
+  transition-duration: 2s;
+  border: 2px solid rgba(165, 165, 165, 0.972);
+}
+
+.toggleButton.toggledButton {
+  transform: translateX(30px);
+  background-color: rgb(244, 244, 244);
+}
+
+.toggleButton {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(79, 79, 79);
+  border-radius: 100%;
+  transition: transform 0.5s ease;
+}
+
+input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+}
+input[type="number"]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
+
+@keyframes rotateFrame{
+  0% {transform: rotate(36deg);}
+  10% {transform: rotate(72deg);}
+  20% {transform: rotate(108deg);}
+  30% {transform: rotate(144deg);}
+  40% {transform: rotate(180deg);}
+  50% {transform: rotate(216deg);}
+  60% {transform: rotate(252deg);}
+  70% {transform: rotate(278deg);}
+  80% {transform: rotate(304deg);}
+  90% {transform: rotate(340deg);}
+  100% {transform: rotate(360deg);}
+}
+@keyframes flowingAnimation{
+  0% {opacity: 0.3;}
+  20% {opacity: 0.6;}
+  60% {opacity: 0.7;}
+  100% {opacity: 1;}
+}
+.spiiningLoadingAgencyDetails{
+  animation-name: rotateFrame;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.animation-sidebar{
+  transition: all;
+  
+}
+
+.animation-sidebar-mobile{
+  transition: all;
+}
+
+.loadingAnimation{
+  animation-name: flowingAnimation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+
+.background_hover:hover{
+  background-color: blue;
+}
+
+.scrollable-element {
+    overflow: scroll; /* Enable scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.scrollable-element::-webkit-scrollbar {
+    display: none; /* Hide scrollbars on webkit browsers */
+}
