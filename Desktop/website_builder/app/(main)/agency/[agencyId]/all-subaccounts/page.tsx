@@ -10,7 +10,7 @@ type Props = {
   searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-const Page = async (props: Props) => {
+const Page = async ({params}: Props) => {
 
   const user = await getUserAuthDetails();
 
@@ -26,7 +26,7 @@ const Page = async (props: Props) => {
         <SearchBar user={user}/> 
       </div>
 
-      <CreateSubbAccountButtton user={user} id={props.params.agencyId}/>
+      <CreateSubbAccountButtton user={user} id={params.agencyId}/>
     </div>
   )
 }
