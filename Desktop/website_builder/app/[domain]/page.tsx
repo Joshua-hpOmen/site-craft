@@ -6,11 +6,12 @@ import React from 'react'
 import FunnelEditor from '../(main)/subaccount/[subaccountId]/funnels/[funnelId]/editor/[funnelPageId]/_components/funnel-editor'
 
 type Props = {
-  params : { domain: string } 
+  params : Promise<{ domain: string } >
 }
 
 const page = async (props: Props) => {
-  const domainData = await getDomainContent(props.params.domain.slice(0, -1));
+  const params = await props.params
+  const domainData = await getDomainContent(params.domain.slice(0, -1));
 
   if(!domainData){
     return notFound() 
