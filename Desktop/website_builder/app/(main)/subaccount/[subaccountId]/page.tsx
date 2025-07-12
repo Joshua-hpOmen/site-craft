@@ -63,7 +63,7 @@ const page = async (props: Props) => {
     <div className='relative w-full h-full p-5'>
 
       {!subaccountDetails.connectAccountId && (
-        <div className="absolute -top-10 -left-10 right-0 bottom-0 z-30 flex flex-col items-center justify-center backdrop-blur-md bg-background/50">
+        <div className="absolute -top-10 -left-10 right-0 bottom-0 z-10 flex flex-col items-center justify-center backdrop-blur-md bg-background/50">
           <h1>Connect your stripe</h1>
           <p>You need to connect your stripe account to see metrics</p> <br />
 
