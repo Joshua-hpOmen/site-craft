@@ -1,9 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-type Props = {}
-
-const Loading = (props: Props) => {
+const Loading = () => {
   return (
     <div className='w-screen h-screen flex items-center justify-center'>
         <div className='justify-center items-center flex flex-row gap-2'>

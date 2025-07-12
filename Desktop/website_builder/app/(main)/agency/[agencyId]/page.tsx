@@ -1,7 +1,7 @@
 import { Progress } from '@/components/ui/progress'
 import { db } from '@/lib/db'
 import { stripe } from '@/lib/stripe'
-import { ChevronLeft, Contact2, DollarSign, Goal, GoalIcon, ShoppingCart } from 'lucide-react'
+import { ChevronLeft, Contact2, DollarSign,  GoalIcon, ShoppingCart } from 'lucide-react'
 import React from 'react'
 import { AreaChart } from "@tremor/react";
 import CircleProgress from '@/components/global/CircleProgress'

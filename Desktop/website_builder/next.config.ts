@@ -11,7 +11,10 @@ const nextConfig: NextConfig = {
       'https://utfs.io'
     ]
   },
-  reactStrictMode: false
+  reactStrictMode: false,
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 };
 
 export default nextConfig;

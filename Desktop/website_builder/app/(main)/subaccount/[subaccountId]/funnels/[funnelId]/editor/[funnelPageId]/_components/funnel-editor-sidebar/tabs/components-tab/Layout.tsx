@@ -1,14 +1,9 @@
-import { EditorBtns } from '@/lib/constants'
-import { EditorElement, useEditor } from '@/providers/editor/editor-provider'
-import clsx from 'clsx'
-import { ChevronDown, Contact2Icon, ImageIcon, Link2Icon, TypeIcon, Youtube } from 'lucide-react'
-import Image from 'next/image'
+import { useEditor } from '@/providers/editor/editor-provider'
 import React from 'react'
 import RecursiveLayoutTree from './_components/RecursiveLayoutTree'
 
-type Props = {}
 
-const Layout = (props: Props) => {
+const Layout = () => {
   const {state} = useEditor();
   const [mounted, isMounted] = React.useState(false);
 

@@ -2,9 +2,7 @@ import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-type Props = {}
-
-const MobileNotSupported = (props: Props) => {
+const MobileNotSupported = () => {
   return (
     <div className='h-screen w-screen flex items-center justify-center bg-background z-[100]'>
         <div className='flex flex-col items-center'>

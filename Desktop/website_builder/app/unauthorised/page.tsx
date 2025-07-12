@@ -2,9 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-type Props = {}
-
-const page = (props: Props) => {
+const page = () => {
   return (
     <div className='w-[100%] h-[100%] flex gap-5 flex-col items-center justify-center'>
         <span className='text-3xl md:text-7xl font-bold'>Unauthorised Access!</span>

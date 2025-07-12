@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const Tablist = (props: Props) => {
+const Tablist = () => {
   return (
     <div>Tablist</div>
   )

@@ -1,5 +1,4 @@
 "use client"
-import { getNotifcationAndUser } from '@/lib/queries'
 import { GeneralNavBarConxtext } from '@/providers/nav-bar'
 import { UserButton } from '@clerk/nextjs'
 import { Notification, Role} from '@prisma/client'

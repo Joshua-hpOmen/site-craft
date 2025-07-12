@@ -13,11 +13,11 @@ type Props = {
   subaccountId: string
 }
 
-const index = (props: Props) => {
-  const {state,  funnelId} = useEditor()
-  const mobile = useMobile()
+const FunnelEditorSideBar = (props: Props) => {
   const [selectedPage, setSelectedPage] = React.useState('settings')
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
+  const {state,  funnelId} = useEditor()
+  const mobile = useMobile()
   return (
     !mobile && <div className={clsx('h-full max-h-full py-3 flex flex-row-reverse bg-background justify-start', {"hidden": state.editor.previewMode})}>
 
@@ -81,4 +81,4 @@ const index = (props: Props) => {
   )
 }
 
-export default index
+export default FunnelEditorSideBar

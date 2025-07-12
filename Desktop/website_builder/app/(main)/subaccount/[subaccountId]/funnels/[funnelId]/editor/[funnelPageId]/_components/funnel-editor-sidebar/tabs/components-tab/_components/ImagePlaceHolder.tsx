@@ -2,9 +2,7 @@ import { EditorBtns } from '@/lib/constants'
 import { Image } from 'lucide-react'
 import React from 'react'
 
-type Props = {}
-
-const ImagePlaceHolder = (props: Props) => {
+const ImagePlaceHolder = () => {
   const handleDragStart = (e: React.DragEvent, type:  EditorBtns) => {
     if(type === null) return
 

@@ -21,12 +21,6 @@ type Props = {
     id: string
 }
 
-const test_subbaccounts = [{subAccountLogo: '/assets/imagePlaceholder.png', address: 'Bradford Road', id: 1,name: "SiteCraft"},
-   {subAccountLogo: '/assets/imagePlaceholder.png', address: 'Bradford Road', id: 1,name: "Chelsea"},
-   {subAccountLogo: '/assets/imagePlaceholder.png', address: 'Bradford Road', id: 1,name: "Real Madrid"},
-   {subAccountLogo: '/assets/imagePlaceholder.png', address: 'Bradford Road', id: 1,name: "Barcelona"},
-   {subAccountLogo: '/assets/imagePlaceholder.png', address: 'Bradford Road', id: 1,name: "Bayern"},
-   {subAccountLogo: '/assets/imagePlaceholder.png', address: 'Bradford Road', id: 1,name: "Real Sociedad"}]
 
 const MenuOptions = (props: Props) => {
   const {setClose} = React.useContext(GeneralNavBarConxtext)

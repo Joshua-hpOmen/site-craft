@@ -2,9 +2,7 @@
 import { GeneralNavBarConxtext } from '@/providers/nav-bar'
 import React from 'react'
 
-type Props = {}
-
-const CloseSidebar = (props: Props) => {
+const CloseSidebar = () => {
   const {isVisibleForEditor, setCloseEditor} = React.useContext(GeneralNavBarConxtext)
   const [mounted, setMounted] = React.useState(false);
 

@@ -6,9 +6,8 @@ import { UserButton } from '@clerk/nextjs'
 import { ModeToggle } from '../global/mode-toggle'
 import { currentUser } from '@clerk/nextjs/server'
 
-type Props = {}
 
-const Navigation = async (props: Props) => {
+const Navigation = async () => {
     const user = await currentUser()
     const userLoggedIn = Boolean(user?.id)
 

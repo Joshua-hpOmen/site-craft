@@ -2,9 +2,7 @@ import { EditorBtns } from '@/lib/constants'
 import { Youtube } from 'lucide-react'
 import React from 'react'
 
-type Props = {}
-
-const VideoPlaceHolder = (props: Props) => {
+const VideoPlaceHolder = () => {
 
     const handleOnDragStart = (e: React.DragEvent, type: EditorBtns) => {
         if(type === null) return

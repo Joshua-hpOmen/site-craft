@@ -1,13 +1,9 @@
 "use server"
-import { clerkClient, createClerkClient, currentUser} from "@clerk/nextjs/server"
+import { clerkClient, currentUser} from "@clerk/nextjs/server"
 import { db } from "./db"
 import { redirect } from "next/navigation"
-import { Agency, Contact, FunnelPage, Plan, Prisma, Role, SubAccount, Tag, Ticket, User } from "@prisma/client"
+import { Agency, Plan, Prisma, Role,  Tag, User } from "@prisma/client"
 import { v4 } from "uuid"
-import { sub } from "date-fns"
-import { pipeline } from "stream"
-import { number } from "zod"
-import { connect } from "http2"
 
 
 type Props = {
@@ -22,7 +18,7 @@ export const saveActLogNotification = async ({agencyId, description, subAccountI
 
     if(!authUser){
         const response = await db.user.findFirst({ where: { Agency : { SubAccount : { some : { id: subAccountId } } } } })
-        response ? userData = response : null
+        userData = response
     }else {
         userData = await db.user.findFirst({where : {email : authUser?.emailAddresses[0].emailAddress}})
     }
@@ -35,7 +31,7 @@ export const saveActLogNotification = async ({agencyId, description, subAccountI
         if(!subAccountId) throw new Error("Subbacount and Agency Id not provided")
 
         const response = await db.subAccount.findUnique({where :{id: subAccountId}})
-        response ? foundAgencyId = response.agencyId : null
+        if(response) foundAgencyId = response.agencyId 
     }
 
     if(subAccountId){
@@ -81,7 +77,7 @@ export const getUserAuthDetails = async () => {
     }
 }
 
-const createTeamUser = async (agencyId: String, user: User) => {
+const createTeamUser = async (agencyId: string, user: User) => {
     if(user.role === 'AGENCY_OWNER') return null
 
     const response = await db.user.create({data: {...user}})
@@ -183,7 +179,7 @@ export const initUser = async (newUser: Partial<User>) => {
     return newUserData
 }
 
-export const upsertAgency = async (agency: Prisma.AgencyCreateInput, price?: Plan) => {
+export const upsertAgency = async (agency: Prisma.AgencyCreateInput) => {
     if(!agency.companyEmail) return null
 
     try{
@@ -281,7 +277,7 @@ export const upsertSubbaccount = async (subbaccountInfo: Prisma.SubAccountCreate
 
         return response
     } catch (error) {
-        
+        console.error(error)
     }
 }
 
@@ -319,7 +315,7 @@ export const changeUserPermissions = async (permissionId: string | undefined, ag
             create: { access: permissionVal, subAccountId: subbAccountId, email: agencyOwnerEmail }
          })
          return resposne
-    }catch(err){
+    }catch{
         console.log("🔴Couldnt create or update permission from query.ts/changeUserPermissions")
     }
 
@@ -357,7 +353,7 @@ export const sendInvitation = async(role: Role, email: string, agencyId: string)
     })
 
     try{
-        const invitation = (await clerkClient()).invitations.createInvitation({
+        (await clerkClient()).invitations.createInvitation({
             emailAddress: email,
             redirectUrl: process.env.NEXT_PUBLIC_URL,
             publicMetadata: {
@@ -524,7 +520,7 @@ export const getContact = async (subaccountId:string) => {
     return response
 }
 
-export const upsertTicket = async (input : Prisma.TicketCreateManyAssignedInput, tags: Tag[], contact?: Contact) => {
+export const upsertTicket = async (input : Prisma.TicketCreateManyAssignedInput, tags: Tag[]) => {
     let orderTicket = input.order;
     if(!Boolean(orderTicket)){
         const lanes = await db.ticket.count({where: {laneId: input.laneId}})
@@ -585,7 +581,7 @@ export const upsertSubscription = async (agencyId: string, data:  {
     agencyId: string;
     customerId: string;
     currentPeriodEndDate: Date;
-    priceId: any;
+    priceId: string;
     subscriptionId: string;
     plan: Plan;
 }) => {

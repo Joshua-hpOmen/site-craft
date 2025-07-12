@@ -1,9 +1,8 @@
 import React from 'react'
 import { SignUp } from '@clerk/nextjs'
 
-type Props = {}
 
-const page = (props: Props) => {
+const page = () => {
 
   return (
     <div>

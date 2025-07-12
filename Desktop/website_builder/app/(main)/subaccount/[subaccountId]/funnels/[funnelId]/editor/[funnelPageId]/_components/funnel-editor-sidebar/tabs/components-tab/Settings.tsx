@@ -11,8 +11,6 @@ import clsx from 'clsx'
 import { AlignCenter, AlignHorizontalJustifyCenterIcon, AlignHorizontalJustifyEndIcon, AlignHorizontalJustifyStart, AlignHorizontalSpaceAround, AlignHorizontalSpaceBetween, AlignJustify, AlignLeft, AlignRight, AlignVerticalJustifyCenter, Check, ChevronDown, ChevronRightIcon, ChevronsUpDown, LucideImageDown } from 'lucide-react'
 import React from 'react'
 
-type Props = {}
-
 
 const fontTypes : string[] = [
   "Arial, sans-serif",
@@ -240,7 +238,7 @@ const colorArr: string[][] =[
   ["rose-950", "#881337"], // 950
 ]
 
-const Settings = (props: Props) => {
+const Settings = () => {
     const {state, dispatch} = useEditor()
     const [showCustom, setShowCustom] = React.useState(true)
     const [showTypography, setShowTypography] = React.useState(true)
@@ -661,7 +659,7 @@ const Settings = (props: Props) => {
             <div>
 
                 <h2 className='flex justify-between items-center my-3'>
-                    Flexbox <Switch onCheckedChange={(e) => handleOnChange({target: {id: "display", value: state.editor.selectedElement.styles.display === "flex" ? "block" : "flex"}})} checked={state.editor.selectedElement.styles.display === "flex"}/>
+                    Flexbox <Switch onCheckedChange={() => handleOnChange({target: {id: "display", value: state.editor.selectedElement.styles.display === "flex" ? "block" : "flex"}})} checked={state.editor.selectedElement.styles.display === "flex"}/>
                 </h2>
 
                 {state.editor.selectedElement.styles.display === "flex" && <div>
