@@ -2,6 +2,7 @@ import { getUserAuthDetails } from '@/lib/queries'
 import React from 'react'
 import SearchBar from './_components/SearchBar'
 import CreateSubbAccountButtton from './_components/CreateSubbAccountButtton'
+
 type Props = {
     params : {agencyId : string}
 }
@@ -10,7 +11,6 @@ type Props = {
 const page = async (props: Props) => {
 
   const user = await getUserAuthDetails();
-  const params = await props.params;
 
   if(!user) return
 
@@ -24,7 +24,7 @@ const page = async (props: Props) => {
         <SearchBar user={user}/> 
       </div>
 
-      <CreateSubbAccountButtton user={user} id={params.agencyId}/>
+      <CreateSubbAccountButtton user={user} id={props.params.agencyId}/>
     </div>
   )
 }
