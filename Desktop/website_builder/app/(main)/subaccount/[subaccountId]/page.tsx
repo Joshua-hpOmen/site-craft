@@ -65,10 +65,10 @@ const page = async (props: Props) => {
       {!subaccountDetails.connectAccountId && (
         <div className="absolute -top-10 -left-10 right-0 bottom-0 z-30 flex items-center justify-center backdrop-blur-md bg-background/50">
           <h1>Connect your stripe</h1>
-          <p>You need to connect your stripe account to see metrics</p>
+          <p>You need to connect your stripe account to see metrics</p> <br />
 
           <div>
-            <Link href={`/subaccount/${subaccountDetails.id}/launchpad`}><ChevronLeft/>Launch Pad</Link>
+            <Link className='flex items-center gap-2 px-6 py-3 rounded-md' href={`/subaccount/${subaccountDetails.id}/launchpad`}><ChevronLeft/>Launch Pad</Link>
           </div>
 
         </div>
