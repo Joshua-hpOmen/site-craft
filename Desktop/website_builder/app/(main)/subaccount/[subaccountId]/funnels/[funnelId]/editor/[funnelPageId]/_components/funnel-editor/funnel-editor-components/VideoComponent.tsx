@@ -10,6 +10,30 @@ type Props = {
     element: EditorElement
 }
 
+function getYouTubeEmbedUrl(url: string): string {
+  if (!url) return "https://www.youtube.com/embed/Vxq6Qc-uAmE"
+
+  try {
+    const parsedUrl = new URL(url)
+
+    // Handle standard YouTube URLs
+    if (parsedUrl.hostname.includes("youtube.com")) {
+      const videoId = parsedUrl.searchParams.get("v")
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`
+    }
+
+    // Handle youtu.be short URLs
+    if (parsedUrl.hostname === "youtu.be") {
+      return `https://www.youtube.com/embed${parsedUrl.pathname}`
+    }
+
+    // Fallback: use original if not YouTube
+    return url
+  } catch {
+    return "https://www.youtube.com/embed/Vxq6Qc-uAmE"
+  }
+}
+
 const VideoComponent = (props: Props) => {
     const {state, dispatch} = useEditor()
 
@@ -41,7 +65,9 @@ const VideoComponent = (props: Props) => {
             }
         })
     }
-
+    
+    if(Array.isArray(props.element.content)) return
+    const url = getYouTubeEmbedUrl(props.element.content.src)
 
   return (
     <div style={props.element.styles} onClick={handleOnClick} draggable={!state.editor.liveMode} onDragStart={(e) => handleDragStart(e, "video")}
@@ -60,7 +86,7 @@ const VideoComponent = (props: Props) => {
         </>}
 
         {!Array.isArray(props.element.content) && (
-            <iframe src={props.element.content.src ? props.element.content.src.search(new RegExp("www.youtube.com", "i")) !== -1 ? props.element.content.src.split("www.youtube.com")[0] + 'embed' + props.element.content.src.split("www.youtube.com")[1] : props.element.content.src  : "https://www.youtube.com/embed/Vxq6Qc-uAmE"} title='Youtube video Player' width={props.element.styles.width || "315"} height={props.element.styles.height || "560"} 
+            <iframe src={url} title='Youtube video Player' width={props.element.styles.width || "315"} height={props.element.styles.height || "560"} 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/>
         )}
 

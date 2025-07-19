@@ -14,14 +14,14 @@ const CustomComponent = (props: Props) => {
     const previewRef = React.useRef<HTMLIFrameElement>(null)
     
     React.useEffect(() => {
-    if(!previewRef.current) return
-    if(Array.isArray(props.element.content)) return
-    const doc = previewRef.current.contentDocument
-    if(!doc) return
+        if(!previewRef.current) return
+        if(Array.isArray(props.element.content)) return
+        const doc = previewRef.current.contentDocument
+        if(!doc) return
 
-    doc.open()
-    doc.write(props.element.content.innerHTML || "<section>Hello World</section>")
-    doc.close()
+        doc.open()
+        doc.write(props.element.content.innerHTML || "<section>Hello World</section>")
+        doc.close()
     }, [props.element.content])
 
     const handleClick = (e: React.MouseEvent) => {

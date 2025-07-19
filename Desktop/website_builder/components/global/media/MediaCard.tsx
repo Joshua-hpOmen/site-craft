@@ -34,9 +34,15 @@ const MediaCard = (props: Props) => {
         }
     }
   return (
-    <div className='w-[320px] h-[250px] flex flex-col justify-between bg-slate-900 px-5 py-4 rounded-sm' key={props.index}>
-        <div className='relative rounded-md flex  mb-2'>
-            <Image src={props.media.link} alt='Media Image' width={230} height={200} className='rounded-md object-contain'/>
+    <div className='w-[320px] h-[280px] flex flex-col justify-between bg-slate-900 px-5 py-4 rounded-sm' key={props.index}>
+        <div className='relative rounded-md mb-2'>
+            <Image
+                src={props.media.link}
+                alt='Media Image'
+                width={230}
+                height={200}
+                className='rounded-md !w-[230px] !h-[200px]'
+            />
         </div>
         <div className='flex flex-row justify-between'>
             <div>
@@ -51,7 +57,7 @@ const MediaCard = (props: Props) => {
                 <MoreHorizontal onClick={() => setShowModal(true)}/>
 
                 {showModal && <>
-                    <div className='fixed top-0 bottom-0 right-0 left-0' onClick={e => setShowModal(false)}></div>
+                    <div className='fixed top-0 bottom-0 right-0 left-0' onClick={() => setShowModal(false)}></div>
                     <div className='w-[180px] bg-slate-900 rounded-md px-4 py-3 absolute right-3 top-2 flex flex-col gap-3' onClick={e => e.stopPropagation()}>
                         <div>Actions</div>
                         <div className='flex flex-row gap-1 cursor-pointer' onClick={() => {navigator.clipboard.writeText(props.media.link); toast({title: "Copied link to clipboard"}) }}>

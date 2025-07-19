@@ -64,13 +64,11 @@ const ImageComponent = (props: Props) => {
             </div>
         </>}
         
-        {!Array.isArray(props.element.content) && props.element.content.src ? <Image unoptimized alt='Image' src={props.element.content.src || ""} className='object-contain' onError={(e) => {
+        {!Array.isArray(props.element.content) && props.element.content.src ? <Image unoptimized alt='Image' src={props.element.content.src || ""}  fill className='object-fill' onError={(e) => {
           const target = e.target as HTMLImageElement 
           target.onerror = null;
           target.src = ""
-        }}
-          width={props.element.styles.width?.toString().endsWith('px') ? Number(props.element.styles.width?.toString().split('p')[0]) : Number(props.element.styles.width)} 
-          height={props.element.styles.height?.toString().endsWith('px') ? Number(props.element.styles.height?.toString().split('p')[0]) : Number(props.element.styles.height)}/>
+        }}></Image>
         :<div className="cursor-pointer w-full bg-black relative group">
           <FunnelPagePlaceholder />
         </div>}

@@ -333,6 +333,14 @@ const Settings = () => {
                             </div>
                         )
                     }
+                    {
+                        state.editor.selectedElement.type === "video" && !Array.isArray(state.editor.selectedElement.content) && (
+                            <div> <br />
+                                <p className='text-muted-foreground mb-2'>Video src:</p>
+                                <Input id='src' placeholder='https:video.url.com' onBlur={handleChangeCustomValues} defaultValue={state.editor.selectedElement.content.src}/>
+                            </div>
+                        )
+                    }
                 </div>}
 
             </div>

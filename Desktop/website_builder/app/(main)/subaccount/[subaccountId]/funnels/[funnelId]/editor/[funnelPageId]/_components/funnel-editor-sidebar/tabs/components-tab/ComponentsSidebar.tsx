@@ -149,7 +149,7 @@ const ComponentsSidebar = (props: Props) => {
         <div>
           <h2 className='flex justify-between' onClick={() =>  setShowCustomComponents(prev => !prev)}>Custom Components <ChevronDown/></h2> <br />
 
-          {showCustomComponents && customComponents && <div className='my-4'>
+          {showCustomComponents && customComponents && <div className='flex flex-wrap gap-2 my-4'>
             {customComponents.map((component, index) => (
               <CustomComponentPlaceholder key={index} component={component} funnelId={props.funnelId} subaccountId={props.subaccountId}/>
             ))}
