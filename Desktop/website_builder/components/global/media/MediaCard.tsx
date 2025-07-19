@@ -36,7 +36,7 @@ const MediaCard = (props: Props) => {
   return (
     <div className='w-[320px] h-[250px] flex flex-col justify-between bg-slate-900 px-5 py-4 rounded-sm' key={props.index}>
         <div className='relative rounded-md flex  mb-2'>
-            <Image src={props.media.link} alt='Media Image' width={230} height={200} className='rounded-md'/>
+            <Image src={props.media.link} alt='Media Image' width={230} height={200} className='rounded-md object-contain'/>
         </div>
         <div className='flex flex-row justify-between'>
             <div>

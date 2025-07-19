@@ -64,7 +64,7 @@ const ImageComponent = (props: Props) => {
             </div>
         </>}
         
-        {!Array.isArray(props.element.content) && props.element.content.src ? <Image unoptimized alt='Image' src={props.element.content.src || ""} onError={(e) => {
+        {!Array.isArray(props.element.content) && props.element.content.src ? <Image unoptimized alt='Image' src={props.element.content.src || ""} className='object-contain' onError={(e) => {
           const target = e.target as HTMLImageElement 
           target.onerror = null;
           target.src = ""
