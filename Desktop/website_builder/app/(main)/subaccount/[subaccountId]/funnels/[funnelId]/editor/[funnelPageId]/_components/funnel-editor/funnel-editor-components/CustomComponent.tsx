@@ -13,18 +13,8 @@ const CustomComponent = (props: Props) => {
     const { state, dispatch } = useEditor()
     const previewRef = React.useRef<HTMLIFrameElement>(null)
     
-    React.useEffect(() => {
-        if(!previewRef.current) return
-        if(Array.isArray(props.element.content)) return
-        const doc = previewRef.current.contentDocument
-        if(!doc) return
-
-        doc.open()
-        doc.write(props.element.content.innerHTML || "<section>Hello World</section>")
-        doc.close()
-    }, [props.element.content])
-
-    const handleClick = (e: React.MouseEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleClick = (e : any) => {
         e.stopPropagation();
 
         dispatch({
@@ -34,6 +24,27 @@ const CustomComponent = (props: Props) => {
             }
         })
     }
+
+    React.useEffect(() => {
+        if(!previewRef.current) return
+        if(Array.isArray(props.element.content)) return
+        const doc = previewRef.current.contentDocument
+        if(!doc) return
+
+        doc.open()
+        doc.write(props.element.content.innerHTML || "<section>Hello World</section>");
+        doc.close()
+
+        previewRef.current.onload = () => {
+                doc.body.addEventListener("click", handleClick)
+        }
+        
+        return () => {
+            doc.body.removeEventListener("click", handleClick)
+        }
+
+    }, [props.element.content])
+
 
     const handleDrag = (e: React.DragEvent, type: EditorBtns) => {
         e.stopPropagation();
@@ -56,12 +67,12 @@ const CustomComponent = (props: Props) => {
 
   return (
     <div draggable={!state.editor.liveMode} onClick={handleClick} style={props.element.styles} onDragStart={(e) => handleDrag(e, "custom")}
-        className={clsx("p-4 w-full m-[5px] relative text-[16px] transition-all", {
+        className={clsx("p-[2px] w-full m-[5px] relative text-[16px] transition-all", {
             "!border-blue-500": state.editor.selectedElement.id === props.element.id,
             "!border-solid" : state.editor.selectedElement.id === props.element.id,
             "border-dashed border-[1px] border-slate-300" : !state.editor.liveMode
         })}>
-        <iframe ref={previewRef}></iframe>
+        <iframe ref={previewRef} className='w-full'></iframe>
 
         {state.editor.selectedElement.id === props.element.id && !state.editor.liveMode && <>
             <Badge className='absolute -top-[23px] -left-[1px] rounded-none rounded-t-lg'>

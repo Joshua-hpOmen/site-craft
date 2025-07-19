@@ -67,7 +67,7 @@ const VideoComponent = (props: Props) => {
     }
     
     if(Array.isArray(props.element.content)) return
-    const url = getYouTubeEmbedUrl(props.element.content.src)
+    const url = getYouTubeEmbedUrl(props.element.content.src!)
 
   return (
     <div style={props.element.styles} onClick={handleOnClick} draggable={!state.editor.liveMode} onDragStart={(e) => handleDragStart(e, "video")}
