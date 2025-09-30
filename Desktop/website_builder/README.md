@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏗️ Site-Craft
 
-## Getting Started
+**Site-Craft** is a powerful drag-and-drop website builder designed to give creators, businesses, and teams the freedom to build modern websites with ease.  
+Whether you’re launching a store, managing projects, or sending campaigns, Site-Craft gives you everything you need in one sleek platform.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🖱️ **Drag & Drop Builder** – Create beautiful websites without writing code.  
+- 📧 **Email Campaigns** – Send updates and marketing messages directly to your users.  
+- 🗂️ **CRM Tools** – Manage and organize your customers efficiently.  
+- 🪄 **Kanban Board** – Keep track of projects and workflows visually.  
+- 💳 **Product Selling** – Sell products directly through your custom-built sites with integrated payments.  
+- 💻 **Custom Code Components** – Add your own HTML, CSS, and JavaScript via the built-in code editor.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+- ⚛️ **React + Next.js** – Frontend framework for seamless UI/UX.  
+- 🟦 **TypeScript** – Strong typing for scalable development.  
+- 💳 **Stripe** – Integrated payments made easy.  
+- 📊 **Prisma + PostgreSQL** – Reliable database management.  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Why Site-Craft?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Building a modern online presence shouldn't require juggling ten different tools.  
+Site-Craft brings websites, CRMs, e-commerce, and marketing into a single smooth workflow — saving you time and energy while helping you focus on what matters: growing your business.
