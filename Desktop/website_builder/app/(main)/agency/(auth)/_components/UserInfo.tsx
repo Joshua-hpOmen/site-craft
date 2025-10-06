@@ -1,35 +1,48 @@
 "use client"
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
-import { Clipboard } from 'lucide-react'
+import { CheckCircle2Icon, Clipboard } from 'lucide-react'
 import React from 'react'
 
 const UserInfo = () => {
-  return (<div className='flex gap-3'>
+
+    const [selectedEmail, setSelectedEmail] = React.useState(false)
+    const [selectedPassword, setSelectedPassword] = React.useState(false)
+
+  return <div className='flex gap-3'>
   
     <Card className='p-4 bg-muted'>
         <CardTitle className='text-center'>User Info</CardTitle> <br />
         <CardContent>
             <span>Email: </span>
-            <CardDescription className='flex items-center flex-row-reverse gap-2 justify-center '><Clipboard className='cursor-pointer' size={17} onClick={() => window.navigator.clipboard.writeText("email1@gmail.com")}/>email1@gmail.com</CardDescription>
+            <CardDescription className='flex items-center flex-row-reverse gap-2 justify-center '>
+                {!selectedEmail ? <Clipboard className='cursor-pointer' size={17} onClick={() => {
+                      window.navigator.clipboard.writeText("email1@gmail.com");
+                      setSelectedEmail(true);
+                      setTimeout(() => setSelectedEmail(false), 1000)
+                  }
+                }/> : <span className='border rounded-full'>
+                    <CheckCircle2Icon size={17}/>    
+                </span>}
+                email1@gmail.com
+            </CardDescription>
         </CardContent>
         <CardContent>
             <span>Password: </span>
-            <CardDescription className='flex items-center flex-row-reverse gap-2 justify-center '><Clipboard className='cursor-pointer' size={17} onClick={() => window.navigator.clipboard.writeText("email@@password1@@")}/>email@@password1@@</CardDescription>
-        </CardContent>
-        </Card>
+            <CardDescription className='flex items-center flex-row-reverse gap-2 justify-center '>
+                {!selectedPassword ? <Clipboard className='cursor-pointer' size={17} onClick={() => {
+                    window.navigator.clipboard.writeText("email@@password1@@");
+                    setSelectedPassword(true);
+                    setTimeout(() => setSelectedPassword(false), 1000)
+                } }/> : <span className='border rounded-full'>
+                    <CheckCircle2Icon size={17}/>    
+                </span>}
+                email@@password1@@
 
-        <Card className='p-4 bg-muted'>
-        <CardTitle className='text-center'>User Info</CardTitle> <br />
-        <CardContent>
-            <span>Email: </span>
-            <CardDescription className='flex items-center flex-row-reverse gap-2 justify-center '><Clipboard className='cursor-pointer' size={17} onClick={() => window.navigator.clipboard.writeText("email2@gmail.com")}/>email2@gmail.com</CardDescription>
+            </CardDescription>
         </CardContent>
-        <CardContent>
-            <span>Password: </span>
-            <CardDescription className='flex items-center flex-row-reverse gap-2 justify-center '><Clipboard className='cursor-pointer' size={17} onClick={() => window.navigator.clipboard.writeText("email@@password2@@")}/>email@@password2@@</CardDescription>
-        </CardContent>
-        </Card>
-  </div>)
+    </Card>
+        
+  </div>
 }
 
 export default UserInfo
