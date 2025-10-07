@@ -1,23 +1,20 @@
 'use client'
-import React from 'react'
 import clsx from 'clsx'
 import { Check } from 'lucide-react'
 import Link from 'next/link'
-import { useTheme } from 'next-themes'
 
 type Props = {
-    title: String,
-    description: String,
-    price: String,
-    features: String[],
-    priceId: String,
+    title: string,
+    description: string,
+    price: string,
+    features: string[],
+    priceId: string,
 }
 
 const PriceCards = ({title, description, price, features, priceId}: Props) => {
 
-    const {theme} = useTheme()
   return (
-    <div className={clsx('w-[300px] h-[400px] flex flex-col justify-between gap-4 bg-slate-900 p-10 rounded-sm', {'border-2 border-primary': title === "Unlimited SaaS"})}>
+    <div className={clsx('w-[300px] h-[400px] flex flex-col justify-between gap-4 bg-slate-900 p-10 rounded-md', {'border-2 border-primary': title === "Unlimited SaaS"})}>
         <div>
             <h2 className={clsx('font-semibold text-3xl', {'text-muted-foreground' : title !== 'Unlimited SaaS',})}>
                 {title}

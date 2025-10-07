@@ -212,3 +212,12 @@ input[type="number"]::-webkit-outer-spin-button{
 .scrollable-element::-webkit-scrollbar {
     display: none; /* Hide scrollbars on webkit browsers */
 }
+
+.scrollHide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollable-element::-webkit-scrollbar {
+  display: none;
+}

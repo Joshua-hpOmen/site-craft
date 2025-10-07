@@ -14,7 +14,7 @@ const CustomComponent = (props: Props) => {
     const previewRef = React.useRef<HTMLIFrameElement>(null)
     
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleClick = (e : any) => {
+    const handleClick = React.useCallback((e : any) => {
         e.stopPropagation();
 
         dispatch({
@@ -23,7 +23,7 @@ const CustomComponent = (props: Props) => {
                 elementDetails: props.element
             }
         })
-    }
+    }, [])
 
     React.useEffect(() => {
         if(!previewRef.current) return
@@ -43,7 +43,7 @@ const CustomComponent = (props: Props) => {
             doc.body.removeEventListener("click", handleClick)
         }
 
-    }, [props.element.content])
+    }, [handleClick, props.element.content])
 
 
     const handleDrag = (e: React.DragEvent, type: EditorBtns) => {

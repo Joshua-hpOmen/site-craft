@@ -1,21 +1,18 @@
 "use client"
+import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
+import { toast } from '@/hooks/use-toast'
 import useMobile from '@/hooks/useMobile'
-import { useEditor } from '@/providers/editor/editor-provider'
+import { saveActLogNotification, upsertFunnelPage } from '@/lib/queries'
+import { DeviceTypes, useEditor } from '@/providers/editor/editor-provider'
 import { FunnelPage } from '@prisma/client'
+import clsx from 'clsx'
+import dayjs from 'dayjs'
+import { ChevronLeftCircle, EyeIcon, Laptop, Redo2, Smartphone, Tablet, Undo2 } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { FocusEventHandler } from 'react'
 import MobileNotSupported from './MobileNotSupported'
-import Link from 'next/link'
-import { ChevronLeftCircle, EyeIcon, Laptop, Redo2, Smartphone, Tablet, Undo2 } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { useRouter } from 'next/navigation'
-import { saveActLogNotification, upsertFunnelPage } from '@/lib/queries'
-import { toast } from '@/hooks/use-toast'
-import clsx from 'clsx'
-import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
-import dayjs from 'dayjs'
-import {DeviceTypes} from "@/providers/editor/editor-provider"
-import { createPortal } from 'react-dom'
 
 type Props = {
     funnelId: string,
@@ -51,7 +48,7 @@ const FunnelEditorNavigation = (props: Props) => {
                 })
     
                 router.refresh()
-            } catch (error) {
+            } catch  {
                 toast({
                     title: "Oops!",
                     description: "Failed to rename title",
@@ -104,7 +101,7 @@ const FunnelEditorNavigation = (props: Props) => {
                 title: "Success",
                 description: "Saved editor"
             })
-        } catch (error) {
+        } catch  {
             toast({
                 title: "Oops!",
                 description: "Couldnt save the editor",

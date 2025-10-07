@@ -68,7 +68,7 @@ const index = (props: Props) => {
   return (
     <div className={clsx("h-full scrollable-element bg-background rounded-md", 
         {"!w-[850px]": state.editor.device === "Tablet"},
-        {"!w-[420]": state.editor.device === "Mobile"},
+        {"!w-[420px]": state.editor.device === "Mobile"},
         {"!w-full": state.editor.device === "Desktop"}
     )} onClick={handleClick}>
         {state.editor.previewMode && state.editor.liveMode && <button className='fixed top-0 left-0 z-[100] bg-slate-600 rounded-md w-6 h-6' onClick={handleUnPreview}>
