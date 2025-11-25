@@ -1,9 +1,10 @@
-import Image from "next/image";
 import PriceCards from "@/components/site/PriceCards";
 import { pricingCards } from "@/lib/constants";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
 import ExploreCards from "./_components/explor-cards";
 
-export default function Home() {
+export default async function Home() {
 
   const pricCardsHTML = pricingCards.map((item, index) => <PriceCards title={item.title} key={index} description={item.description} price={item.price} features={item.features} priceId={item.priceId}/> )
 
@@ -24,6 +25,7 @@ export default function Home() {
       link: "https://sitecraftprod.vercel.app/subaccount/user_2znDwstVW9IFBGfHMXLKipC5qLt/contacts"
     }
   ]
+  const isUserSignedIn = !! await currentUser();
   return (
     <>
       <div className="relative min-h-full min-w-full flex items-center justify-center flex-col pt-32 scrollHide">
@@ -60,7 +62,7 @@ export default function Home() {
         <div className="flex px-5 gap-3">
 
           <div className="flex flex-col gap-5 w-[30%]">
-            {featuresToExploreArr.map((inst, indx) => <ExploreCards key={indx} heading={inst.heading} paragraph={inst.paragraph} link={inst.link}/>)}
+            {featuresToExploreArr.map((inst, indx) => <ExploreCards key={indx} heading={inst.heading} paragraph={inst.paragraph} link={isUserSignedIn ? inst.link : "/agency/sign-in"}/>)}
           </div>
 
           <div className="overflow-y-auto scrollHide flex flex-col gap-3 max-h-[800px]">
